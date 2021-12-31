@@ -1,8 +1,8 @@
 
 n
 y
-${ROOT_PWD}
-${ROOT_PWD}
+${ARG_ROOT_PWD}
+${ARG_ROOT_PWD}
 y
 y
 y

@@ -1,6 +1,6 @@
 # mariadb-docker
 
-###Launch Docker Image into a Container, Using:
+### Launch Docker Image into a Container, Using:
 
 The following command downlaods and launches the already built image from Docker Hub (https://hub.docker.com/r/hammadrauf/mariadb)
 
@@ -8,50 +8,50 @@ docker run --name mariadb01 -d -p 3306:3306 hammadrauf/mariadb
 
 
 
-###Stop  Container, Using (Database will persist until Container is removed):
+### Stop  Container, Using (Database will persist until Container is removed):
 
 docker stop mariadb01
 
-###Start Already Launched Image (Container) Again, Using (Test Database persistance):
+### Start Already Launched Image (Container) Again, Using (Test Database persistance):
 
 docker start mariadb01
 
-###To connect to started Container BASH shell:
+### To connect to started Container BASH shell:
 
 docker exec -it mariadb01  /bin/bash
 
-###List All (Active and Non Active) Containers: 
+### List All (Active and Non Active) Containers: 
 
 docker ps -a
 
-###Remove a Container Freeing all resources and deleting Databases, Using:
+### Remove a Container Freeing all resources and deleting Databases, Using:
 
 docker rm -f mariadb01
 
-###List All Local Images, Using:
+### List All Local Images, Using:
 
 docker image ls
 
 
-###Delete Particular Image, Using:
+### Delete Particular Image, Using:
 
 docker image rm <<IMAGE ID>>
 docker image rm b45e3b4b08de
 
-###Prune (Delete) unused Images, Using:
+### Prune (Delete) unused Images, Using:
 
 docker image prune
 
 --
 
-##Build  Customized Image Using:
+## Build  Customized Image Using:
 
 To custimize the Docker Image and build it yourself locally perform the following steps.
-###First clone Git Code locally:
+### First clone Git Code locally:
 git clone https://github.com/hammadrauf/mariadb-docker.git
 cd mariadb-docker
 
-###Now Build using:
+### Now Build using:
 
 docker build -t mariadb .
 docker build -t mariadb --build-arg ARG_MYSQL_DB_NAME=yahoodb --build-arg ARG_PU_PWD=hello02 .

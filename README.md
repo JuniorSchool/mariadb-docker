@@ -2,7 +2,7 @@
 
 ### Launch Docker Image into a Container, Using:
 
-The following command downlaods and launches the already built image from Docker Hub (https://hub.docker.com/r/hammadrauf/mariadb)
+The following command downloads and launches the already built image from Docker Hub (https://hub.docker.com/r/hammadrauf/mariadb)
 
 ```
 docker run --name mariadb01 -d -p 3306:3306 hammadrauf/mariadb

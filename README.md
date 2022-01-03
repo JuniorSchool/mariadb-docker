@@ -66,6 +66,8 @@ To custimize the Docker Image and build it yourself locally perform the followin
 git clone https://github.com/hammadrauf/mariadb-docker.git
 cd mariadb-docker
 ```
+Now do your edits to the Dockerfile or other scripts.
+
 ### Now Build using:
 ```
 docker build -t mariadb .

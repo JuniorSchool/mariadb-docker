@@ -74,6 +74,11 @@ docker build -t mariadb .
 docker build -t mariadb --build-arg ARG_MYSQL_DB_NAME=yahoodb --build-arg ARG_PU_PWD=hello02 .
 ```
 
+### To run your customized local Image locally (After sucessful build)
+```
+docker run --name mariadb01 -d -p 3306:3306 mariadb
+```
+
 ## All of the Defined Arguments (ARG) are as follows:
 ```
 ARG_ROOT_PWD (Default=changeme01)

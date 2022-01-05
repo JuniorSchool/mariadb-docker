@@ -103,5 +103,5 @@ docker build --tag <<Your DockerHub Account Name>>/mariadb .
 
 ## Manual Push Image to Docker Hub:
 ```
-docker push ......
+docker push .......
 ```

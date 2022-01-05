@@ -57,6 +57,6 @@ RUN /bin/bash -c "service mariadb start && sleep 5 && mysql -uroot -p${ARG_ROOT_
 WORKDIR /
 RUN /bin/bash -c "rm -rf /maria_install"
 ##RUN /bin/bash -c 'service mariadb start && tail -f /dev/null'
-##CMD [ "/bin/bash", "-c", "/usr/sbin/service mariadb start && /usr/bin/tail -f /dev/null" ]
+CMD [ "/bin/bash", "-c", "/usr/sbin/service mariadb start && /usr/bin/tail -f /dev/null" ]
 ##ENTRYPOINT [ "/bin/bash", "-c", "/usr/sbin/service mariadb start" ]
-ENTRYPOINT [ "/bin/bash", "-c", "/usr/sbin/service mariadb start && /usr/bin/tail -f /dev/null" ]
+##ENTRYPOINT [ "/bin/bash", "-c", "/usr/sbin/service mariadb start && /usr/bin/tail -f /dev/null" ]

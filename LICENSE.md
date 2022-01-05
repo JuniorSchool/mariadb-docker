@@ -1,15 +1,15 @@
 # License
-    COPYRIGHT: HAMMAD RAUF
-    EMAIL: rauf.hammad@gmail.com
+    COPYRIGHT: HAMMAD RAUF, Syed M. Shaaf
+    EMAIL: rauf.hammad@gmail.com, 
     LICENSE: MIT (USE THIS HOWEVER YOU SEE FIT.)
     DATE: 12/30/2021
     VERSION: 1.0
     License Text
-    Copyright (C) 2021-2022 Hammad Rauf : https://github.com/hammadrauf/mariadb-docker
+    Copyright (C) 2021-2022 Hammad Rauf, Syed M. Shaaf : https://github.com/hammadrauf/mariadb-docker
 
 ## Licensce Text
 ```
-Copyright (C) 2021-2022 Hammad Rauf : https://github.com/hammadrauf/mariadb-docker
+Copyright (C) 2021-2022 Hammad Rauf, Syed M. Shaaf : https://github.com/hammadrauf/mariadb-docker
 
 
 Permission is hereby granted, free of charge, to any person

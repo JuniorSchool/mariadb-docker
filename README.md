@@ -7,7 +7,12 @@ The following command downloads and launches the already built image from Docker
 ```
 docker run --name mariadb01 -d -p 3306:3306 hammadrauf/mariadb
 ```
+OR
+The Following command downloads and launches the already built image from Quay.io Regsitry (https://quay.io/repository/hammadrauf/mariadb)
 
+```
+docker run --name mariadb01 -d -p 3306:3306 quay.io/hammadrauf/mariadb
+```
 
 ### Stop  Container, Using (Database will persist until Container is removed):
 
@@ -95,13 +100,13 @@ DEBIAN_FRONTEND (Default=noninteractive)
 MYSQL_DB_NAME (Default = $ARG_MYSQL_DB_NAME or my_db, if ARG is not defined)
 ```
 
-## Build Image for DockerHub:
+## Build Image for DockerHub/Quay.io/Container Registry:
 
 ```
-docker build --tag <<Your DockerHub Account Name>>/mariadb .
+docker build --tag <<Your Account Name>>/mariadb .
 ```
 
-## Manual Push Image to Docker Hub:
+## Manual Push Image to Docker Hub OR Quay.IO:
 ```
 docker push ........
 ```

@@ -29,7 +29,8 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Post a signal to Jenkins URL
-        run: curl https://andromedabay.ddns.net/jenkins/github-webhook/?url=https://github.com/hammadrauf/maraiadb-docker.git
+        #run: curl -i -X POST https://andromedabay.ddns.net/jenkins/github-webhook/?url=https://github.com/hammadrauf/maraiadb-docker.git      
+        run: curl -i -X POST https://andromedabay.ddns.net/jenkins/github-webhook
         
       - name: Echo Message Signal Posted
         run: echo Jenkins signal sent.

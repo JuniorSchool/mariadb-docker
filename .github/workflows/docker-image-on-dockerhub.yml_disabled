@@ -1,4 +1,4 @@
-name: Build and Push mariadb
+name: Build and Push mariadb on Dockerhub
 on:
   push:
     branches: [ main ]
@@ -13,12 +13,12 @@ jobs:
       - name: Check Out Repo 
         uses: actions/checkout@v2
 
-      - name: Login to quay.io
+      - name: Login to Dockerhub
         uses: docker/login-action@v1
         with:
-          registry: ${{ secrets.REGISTRY_NAME }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: ${{ secrets.DOCKERHUB_REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Set up Docker Buildx
         id: buildx
@@ -31,7 +31,7 @@ jobs:
           context: ./
           file: Dockerfile
           push: true
-          tags: ${{ secrets.REGISTRY_NAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}, ${{ secrets.REGISTRY_NAME }}/${{ secrets.IMAGE_NAME }}:latest
+          tags: ${{ secrets.DOCKERHUB_REGISTRY }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}, ${{ secrets.DOCKERHUB_REGISTRY }}/${{ secrets.IMAGE_NAME }}:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

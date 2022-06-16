@@ -108,5 +108,5 @@ docker build --tag <<Your Account Name>>/mariadb .
 
 ## Manual Push Image to Docker Hub OR Quay.IO:
 ```
-docker push ........
+docker push .........
 ```

@@ -1,17 +1,30 @@
-# mariadb-docker
+# mariadb (docker image source)
+
+This is not the official mariadb Docker Image source. 
 
 ### Launch Docker Image into a Container, Using:
 
 The following command downloads and launches the already built image from Docker Hub (https://hub.docker.com/r/hammadrauf/mariadb)
 
 ```
-docker run --name mariadb01 -d -p 3306:3306 hammadrauf/mariadb
+docker run --name mariadb01 -d -p 3306:3306 -v mysql-data:/var/lib/mysql hammadrauf/mariadb
 ```
 OR
 The Following command downloads and launches the already built image from Quay.io Regsitry (https://quay.io/repository/hammadrauf/mariadb)
 
 ```
-docker run --name mariadb01 -d -p 3306:3306 quay.io/hammadrauf/mariadb
+docker run --name mariadb01 -d -p 3306:3306 -v mysql-data:/var/lib/mysql quay.io/hammadrauf/mariadb
+```
+
+### Mount Volume on Host folder in Linux/Windows
+You can mount the volume on the Host server that is running the Docker Container system.
+```
+On Linux:
+	$ docker run --name mariadb01 -d -p 3306:3306 -v /home/user01/mysql-data:/var/lib/mysql hammadrauf/mariadb
+	
+On Windows:
+	C:\> docker run --name mariadb01 -d -p 3306:3306 -v "C:\\Users\\user01\\mysql-data":/var/lib/mysql hammadrauf/mariadb
+
 ```
 
 ### Stop  Container, Using (Database will persist until Container is removed):
@@ -110,3 +123,38 @@ docker build --tag <<Your Account Name>>/mariadb .
 ```
 docker push ........
 ```
+
+---
+
+## Taking Backup of Volumes and Restoring Volumes from Backup
+
+### Backup Steps:
+1. First stop the running target container.
+```
+	docker stop mycontainer
+```	
+2. Choose a Host backup folder or make one if does not exist.
+3. Spin a temporary docker container with Host mounted backup folder + plus the predefined volume, and backup the files.
+```
+	On Linux Host:
+		$ docker run --rm -v myvolume1:/copythis -v /home/user01/backups:/backups ubuntu bash -c "cd /copythis && tar czvf /backup/site-backup.tar.gz ."
+	On Windows Host:
+		C:\> docker run --rm -v myvolume1:/copythis -v "C:\\Users\\user01\\docker_volumes\\backups":/backups ubuntu bash -c "cd /copythis && tar czvf /backup/site-backup.tar.gz ."
+```		
+
+### Restore Steps:
+1. Create a volume that will contain recovered data.
+```
+	docker volume create my-recovered-volume
+```	
+2. Spin a temporary docker container with Host mounted backups folder + new volume.
+```
+	On Linux Host:
+		$ docker run --rm -v my-recovered-volume:/recover -v /home/user01/backups:/backups ubuntu bash -c “cd /recover && tar xzvf /backups/site-backup.tar.gz"
+	On Windows Host:
+		C:\> docker run --rm -v my-recovered-volume:/recover -v "C:\\Users\\user01\\docker_volumes\\backups":/backups ubuntu bash -c "cd /recover && tar xzvf /backups/site-backup.tar.gz"
+```		
+3. Start the target container with my-recovered-volume mounted at the correct mount point.	
+
+### Remote Backup:
+For critical data Remote backup of backup should be performed.

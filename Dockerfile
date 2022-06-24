@@ -29,7 +29,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV MYSQL_DB_NAME=${ARG_MYSQL_DB_NAME:-my_db}
 RUN /bin/bash -c 'echo "deb http://ftp.us.debian.org/debian stable main contrib non-free" > /etc/apt/sources.list.d/additional-repo.list'
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends dialog apt-utils
+RUN apt-get install -y --no-install-recommends dialog apt-utils sudo
 RUN apt-get update
 ##STOPSIGNAL SIGRTMIN+3
 RUN mkdir maria_install
@@ -39,13 +39,13 @@ COPY create_db_user.sh .
 COPY response_file.txt .
 RUN chmod a+x create_db_user.sh
 RUN apt-get install -y --no-install-recommends mariadb-server mariadb-client
-RUN apt-get clean
-RUN rm -rf                        \
-    /var/lib/apt/lists/*          \
-    /var/log/alternatives.log     \
-    /var/log/apt/history.log      \
-    /var/log/apt/term.log         \
-    /var/log/dpkg.log
+#RUN apt-get clean
+#RUN rm -rf                        \
+#    /var/lib/apt/lists/*          \
+#    /var/log/alternatives.log     \
+#    /var/log/apt/history.log      \
+#    /var/log/apt/term.log         \
+#    /var/log/dpkg.log
 RUN /bin/bash -c "service mariadb start && sleep 10 && script -c 'mysql_secure_installation' < response_file.txt"
 RUN /bin/bash -c "sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf && cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind"
 RUN /bin/bash -c "sed -i 's/MYSQL_DB_NAME/${MYSQL_DB_NAME}/g; s/ARG_POWER_USER/${ARG_POWER_USER}/g; s/ARG_PU_PWD/${ARG_PU_PWD}/g' create_db_user.sql" 
@@ -57,6 +57,5 @@ RUN /bin/bash -c "service mariadb start && sleep 5 && mysql -uroot -p${ARG_ROOT_
 WORKDIR /
 RUN /bin/bash -c "rm -rf /maria_install"
 ##RUN /bin/bash -c 'service mariadb start && tail -f /dev/null'
+VOLUME ["/var/lib/mysql"]
 CMD [ "/bin/bash", "-c", "/usr/sbin/service mariadb start && /usr/bin/tail -f /dev/null" ]
-##ENTRYPOINT [ "/bin/bash", "-c", "/usr/sbin/service mariadb start" ]
-##ENTRYPOINT [ "/bin/bash", "-c", "/usr/sbin/service mariadb start && /usr/bin/tail -f /dev/null" ]

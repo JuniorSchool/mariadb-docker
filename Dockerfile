@@ -19,14 +19,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 FROM debian:stable-slim
-ARG ARG_ROOT_PWD=changeme01
-ARG ARG_POWER_USER=ceaser
-ARG ARG_PU_PWD=changeme02
+ARG ARG_ROOT_PWD
+ARG ARG_POWER_USER
+ARG ARG_PU_PWD
 ARG ARG_MYSQL_DB_NAME
 ENV container docker
 ENV TERM=linux
 ENV DEBIAN_FRONTEND=noninteractive
 ENV MYSQL_DB_NAME=${ARG_MYSQL_DB_NAME:-my_db}
+ENV ROOT_PWD=${ARG_ROOT_PWD:-changeme01}
+ENV POWER_USER=${ARG_POWER_USER:-ceaser}
+ENV PU_PWD=${ARG_PU_PWD:-changeme02}
 RUN /bin/bash -c 'echo "deb http://ftp.us.debian.org/debian stable main contrib non-free" > /etc/apt/sources.list.d/additional-repo.list'
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends dialog apt-utils sudo
@@ -48,9 +51,9 @@ RUN apt-get install -y --no-install-recommends mariadb-server mariadb-client
 #    /var/log/dpkg.log
 RUN /bin/bash -c "service mariadb start && sleep 10 && script -c 'mysql_secure_installation' < response_file.txt"
 RUN /bin/bash -c "sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf && cat /etc/mysql/mariadb.conf.d/50-server.cnf | grep bind"
-RUN /bin/bash -c "sed -i 's/MYSQL_DB_NAME/${MYSQL_DB_NAME}/g; s/ARG_POWER_USER/${ARG_POWER_USER}/g; s/ARG_PU_PWD/${ARG_PU_PWD}/g' create_db_user.sql" 
+RUN /bin/bash -c "sed -i 's/MYSQL_DB_NAME/${MYSQL_DB_NAME}/g; s/ARG_POWER_USER/${POWER_USER}/g; s/ARG_PU_PWD/${PU_PWD}/g' create_db_user.sql" 
 ## INSERT SQL HERE - START -- CUSTOMIZATION, USER Creation and DB Creation Script. Use either .sh or .sql file.
-RUN /bin/bash -c "service mariadb start && sleep 5 && mysql -uroot -p${ARG_ROOT_PWD} < create_db_user.sql"
+RUN /bin/bash -c "service mariadb start && sleep 5 && mysql -uroot -p${ROOT_PWD} < create_db_user.sql"
 ##RUN /bin/bash -c "service mariadb start && sleep 5 && ./create_db_user.sh"
 ## INSERT SQL HERE - END
 ## Cleanup installation artifacts for security reasons.

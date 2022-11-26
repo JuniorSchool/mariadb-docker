@@ -19,17 +19,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 FROM debian:stable-slim
-ARG ARG_ROOT_PWD
-ARG ARG_POWER_USER
-ARG ARG_PU_PWD
-ARG ARG_MYSQL_DB_NAME
 ENV container docker
 ENV TERM=linux
 ENV DEBIAN_FRONTEND=noninteractive
-ENV MYSQL_DB_NAME=${ARG_MYSQL_DB_NAME:-my_db}
-ENV ROOT_PWD=${ARG_ROOT_PWD:-changeme01}
-ENV POWER_USER=${ARG_POWER_USER:-ceaser}
-ENV PU_PWD=${ARG_PU_PWD:-changeme02}
+ENV MYSQL_DB_NAME=my_db
+ENV ROOT_PWD=changeme01
+ENV POWER_USER=ceaser
+ENV PU_PWD=changeme02
 RUN /bin/bash -c 'echo "deb http://ftp.us.debian.org/debian stable main contrib non-free" > /etc/apt/sources.list.d/additional-repo.list'
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends dialog apt-utils sudo

@@ -89,20 +89,12 @@ Now do your edits to the Dockerfile or other scripts.
 ### Now Build using:
 ```
 docker build -t mariadb .
-docker build -t mariadb --build-arg ARG_MYSQL_DB_NAME=yahoodb --build-arg ARG_PU_PWD=hello02 .
+docker build -t mariadb --env MYSQL_DB_NAME=yahoodb --env PU_PWD=hello02 .
 ```
 
 ### To run your customized local Image locally (After sucessful build)
 ```
 docker run --name mariadb01 -d -p 3306:3306 mariadb
-```
-
-## All of the Defined Arguments (ARG) are as follows:
-```
-ARG_ROOT_PWD
-ARG_POWER_USER
-ARG_PU_PWD
-ARG_MYSQL_DB_NAME
 ```
 
 ## All of the Environment-Variables (ENV) are as follows:
@@ -119,7 +111,7 @@ PU_PWD (Default to changeme02)
 ## Run Image with Environment Variables
 ```
 On Linux:
-	$ docker run --name mariadb01 -d -p 3306:3306 -v /home/user01/mysql-data:/var/lib/mysql -e MYSQL_DB_NAME:newdbname hammadrauf/mariadb
+	$ docker run --name mariadb01 -d -p 3306:3306 -v /home/user01/mysql-data:/var/lib/mysql --env MYSQL_DB_NAME:newdbname hammadrauf/mariadb
 ```
 
 

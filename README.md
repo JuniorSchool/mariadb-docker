@@ -99,10 +99,10 @@ docker run --name mariadb01 -d -p 3306:3306 mariadb
 
 ## All of the Defined Arguments (ARG) are as follows:
 ```
-ARG_ROOT_PWD (Default=changeme01)
-ARG_POWER_USER (Default=ceaser)
-ARG_PU_PWD (Default=changeme02)
-ARG_MYSQL_DB_NAME (Defaults to my_db)
+ARG_ROOT_PWD
+ARG_POWER_USER
+ARG_PU_PWD
+ARG_MYSQL_DB_NAME
 ```
 
 ## All of the Environment-Variables (ENV) are as follows:
@@ -111,7 +111,17 @@ container (Default=docker)
 TERM (Default=linux)
 DEBIAN_FRONTEND (Default=noninteractive)
 MYSQL_DB_NAME (Default = $ARG_MYSQL_DB_NAME or my_db, if ARG is not defined)
+ROOT_PWD (Default to changeme01)
+POWER_USER (Default to ceaser)
+PU_PWD (Default to changeme02)
 ```
+
+## Run Image with Environment Variables
+```
+On Linux:
+	$ docker run --name mariadb01 -d -p 3306:3306 -v /home/user01/mysql-data:/var/lib/mysql -e MYSQL_DB_NAME:newdbname hammadrauf/mariadb
+```
+
 
 ## Build Image for DockerHub/Quay.io/Container Registry:
 

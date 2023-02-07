@@ -48,5 +48,5 @@ RUN apt-get install -y --no-install-recommends mariadb-server mariadb-client
 #    /var/log/apt/history.log      \
 #    /var/log/apt/term.log         \
 #    /var/log/dpkg.log
-VOLUME ["/var/lib/mysql"]
+VOLUME ["/var/lib/mysql","/var/log/mysql"]
 CMD [ "/bin/bash", "-c", "/startup_script.sh" ]

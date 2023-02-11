@@ -125,6 +125,10 @@ docker build --tag <<Your Account Name>>/mariadb .
 ```
 docker push ........
 ```
+## Manual Push using Podman
+```
+podman push --creds USERNAME:PASSWORD hammadrauf/mariadb-docker docker://docker.io/hammadrauf/mariadb-docker:latest
+```
 
 ---
 

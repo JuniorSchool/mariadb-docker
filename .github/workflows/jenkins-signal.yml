@@ -31,7 +31,7 @@ jobs:
       - name: Post a signal to Jenkins URL
         #run: curl -i -X POST https://andromedabay.ddns.net/jenkins/github-webhook/?url=https://github.com/hammadrauf/maraiadb-docker.git      
         #run: curl -i -X POST -F 'url=https://github.com/hammadrauf/maraiadb-docker.git' https://andromedabay.ddns.net/jenkins/github-webhook
-        run: curl -X POST -L --user ${{ secrets.JENKINS_USER_ID }}:${{ secrets.JENKINS_API_TOKEN_HAMMAD }} https://andromedabay.ddns.net/jenkins/job/Docker-Build-Task-02/build
+        run: curl -X POST -L --user ${{ secrets.JENKINS_USER_ID }}:${{ secrets.JENKINS_API_TOKEN_HAMMAD }} https://hexword.ca/jenkins/job/Docker-Build-Task-02/build
         
       - name: Echo Message Signal Posted
         run: echo Jenkins signal sent.

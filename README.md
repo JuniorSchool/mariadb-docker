@@ -1,6 +1,6 @@
 # mariadb (docker image source)
 
-This is not the official mariadb Docker Image source. 
+This is not the official mariadb Docker Image source. .
 
 ### Launch Docker Image into a Container, Using:
 
